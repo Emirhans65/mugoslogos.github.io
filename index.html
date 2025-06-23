@@ -113,7 +113,73 @@
       </div>
     </div>
   </div>
+<style>
+    /* Sayfayı bulanıklaştırmak için kullanılan CSS */
+    body.blurred * {
+        filter: blur(10px) !important;
+        pointer-events: none !important;
+        user-select: none !important;
+    }
+</style>
 
+<script>
+    // Sağ tıklamayı engelle
+    document.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    });
+
+    // Klavye kısayollarını engelle
+    document.addEventListener('keydown', function (event) {
+        if (
+            (event.ctrlKey && ['c', 'x', 's', 'u'].includes(event.key.toLowerCase())) ||
+            event.keyCode === 123 || // F12
+            (event.ctrlKey && event.shiftKey && event.keyCode === 73) // Ctrl+Shift+I
+        ) {
+            event.preventDefault();
+        }
+    });
+
+    // Metin seçimini engelle
+    document.addEventListener('selectstart', function (event) {
+        event.preventDefault();
+    });
+
+    // Tıklama engelleri (sol, sağ, orta ve ikili tıklama)
+    let leftMouseDown = false;
+    let rightMouseDown = false;
+
+    document.addEventListener('mousedown', function (event) {
+        if (event.button === 0) leftMouseDown = true;
+        if (event.button === 2) rightMouseDown = true;
+
+        if ([0, 1, 2].includes(event.button)) {
+            event.preventDefault();
+        }
+
+        if (leftMouseDown && rightMouseDown) {
+            event.preventDefault();
+        }
+    });
+
+    document.addEventListener('mouseup', function (event) {
+        if (event.button === 0) leftMouseDown = false;
+        if (event.button === 2) rightMouseDown = false;
+    });
+
+    // Iframe koruması
+    if (window !== window.top) {
+        window.top.location = window.location;
+    }
+
+    // Ekran görüntüsü alınırken bulanıklaştırma
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            document.body.classList.add('blurred'); // Sayfa gizlendiğinde bulanıklaştır
+        } else {
+            document.body.classList.remove('blurred'); // Sayfa tekrar görünür olduğunda bulanıklığı kaldır
+        }
+    });
+</script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="assets/helper/bootstrap/js/popper.min.js"></script>
