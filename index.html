@@ -19,12 +19,31 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto Condensed', sans-serif;
-
-      /* Metin seçimini engelle */
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+    }
+
+    /* LOGO ALANI */
+    .logo {
+      padding-top: 60px;   /* yukarıdan kesilmesin */
+      margin-bottom: 30px;
+      overflow: visible;
+      text-align: center;
+    }
+
+    .site-logo {
+      width: 260px;        /* 👈 LOGO BOYUTU */
+      height: auto;
+      display: inline-block;
+    }
+
+    /* MOBİL */
+    @media (max-width: 768px) {
+      .site-logo {
+        width: 170px;
+      }
     }
   </style>
 </head>
@@ -32,14 +51,15 @@
 
   <div class="main">
     <div class="main-right" style="width: 100%;">
-      <div class="content-area" style="margin-top: 0 !important;">
-        
+      <div class="content-area" style="margin-top: 0 !important; overflow: visible;">
+
+        <!-- LOGO -->
         <div class="logo">
           <img src="i/uploads/mugobosltd2.png"
                alt="Mağazamız Yakında Açılıyor"
-               style="max-width: 200px; max-height: 200px">
+               class="site-logo">
         </div>
-
+        
         <div class="h-s">
           <div class="content-h">Mağazamız Yakında Açılıyor</div>
           <div class="content-s">
@@ -161,5 +181,6 @@
   </script>
 </body>
 </html>
+
 
 
